@@ -39,7 +39,7 @@ pipeline {
     stage('Deploying App to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy (configs: 'deploymentservice.yml',kubeconfigId: 'Kubeadm')
+          kubernetesDeploy (configs: 'deploymentservice.yml',kubeconfigId: 'Kubeadm',ssh: [sshCredentialsId: 'github_login', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://20.171.24.14:8080/'])
         }
       }
     }
