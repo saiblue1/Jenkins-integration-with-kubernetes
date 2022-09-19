@@ -11,7 +11,7 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/saiblue1/Jenkins-integration-with-kubernetes.git'
+        git 'https://github.com/saiblue1/nodeapp_test.git'
       }
     }
 
