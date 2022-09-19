@@ -1,38 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodeapp-deployment
+  name: frontendjava-java-deployment
   labels:
-    app: nodeapp
+    app: frontendjava-java
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nodeapp
+      app: frontendjava-java
   template:
     metadata:
       labels:
-        app: nodeapp 
+        app: frontendjava-java
     spec:
       containers:
-      - name: nodeserver
-        image: thetips4you/nodeapp:latest
+      - name: frontendjava-javaserver
+        image: madhublue01/frontendjava:latest
         ports:
-        - containerPort: 3000
+        - containerPort: 8082
         
         
 ---
 
+
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: nodeapp-service
+  name: frontendjava-java-service
 spec:
   selector:
-    app: nodeapp 
-  type: LoadBalancer
+    app: frontendjava-java
+  type: NodePort
   ports:
   - protocol: TCP
     port: 5000
-    targetPort: 3000
-    nodePort: 31110
+    targetPort: 8082
+    nodePort: 30082
