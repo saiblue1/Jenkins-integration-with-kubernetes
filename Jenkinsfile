@@ -18,7 +18,7 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          dockerImage = docker.build dockerimagename
+          sh 'docker build -t madhublue01/nodeapp .'
         }
       }
     }
@@ -29,8 +29,8 @@ pipeline {
            }
       steps{
         script {
-          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("latest")
+          withCredentials([string(credentialsId: 'dockerhublogin', variable: 'dockerhublogin')]) {
+            sh 'docker login -u madhublue01 -p ${dockerhublogin}'
           }
         }
       }
